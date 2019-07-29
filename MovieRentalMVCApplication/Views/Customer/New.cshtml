@@ -1,0 +1,56 @@
+﻿@*@model MovieRentalMVCApplication.Models.Customer*@
+@model MovieRentalMVCApplication.ViewModel.NewCustomerViewModel
+@{
+    /**/
+
+    ViewBag.Title = "New";
+}
+
+<h2>New Customer</h2>
+
+@using (Html.BeginForm("Save", "Customer"))    //controller name//button name
+{<div class="form-group">
+        @Html.LabelFor(m => m.Customer.Name)
+        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.Name)
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.DOB)
+        @Html.TextBoxFor(m => m.Customer.DOB, "{0:d MMMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.DOB)
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.MembershipTypeId)
+        @Html.DropDownListFor(m => m.Customer.MembershipTypeId,
+                      new SelectList(Model.MembershipTypes, "Id", "Name"),
+                         "SelectMembershipType",
+                      new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.MembershipTypeId)
+        @*@Html.DropDownListFor(m => m.membershipType, new { @class = "form-control" })*@
+
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Customer.IsSuscribed)
+            Subscribe to news letter?
+        </label>
+    </div>
+    @Html.HiddenFor(m => m.Customer.Id)
+    @*@Html.AntiForgeryToken()*@
+
+    <div>
+        <button class="btn btn-primary" type="submit">Save</button>
+
+        <button class="btn btn-primary" type="submit">Back</button>
+    </div>
+
+}
+
+
+
+@section scripts{
+@Scripts.Render("~/bundles/jqueryval")
+}

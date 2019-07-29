@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MovieRentalMVCApplication.Models.Customer>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Customers</h2>
+<button class="btn btn-primary">@Html.ActionLink("NewCustomer", "New",null,new {  style = "color: white ;text-decoration:none"})</button>
+
+<table id="customers" class="table table-bordered table-striped">
+    <tr>
+        <th>customer Names</th>
+        @*<th>Discount rate</th>*@
+        <th>MembershipType</th>
+        <th>&nbsp;</th>
+    </tr>
+    @foreach (var m in Model)
+    {
+    <tr>
+        <td>@Html.ActionLink(m.Name, "Edit", new { m.Id })</td>
+        @*<td>@m.membershipType.DiscoutRate%</td>*@
+        @*<td>@m.membershipType.Name</td>*@
+        @*<td><button class="btn btn-primary">@Html.ActionLink("Delete", "Delete", new { m.Id }, new { style = "color: white ;text-decoration:none" })</button></td>*@
+
+        <td><button data-customer-id="@m.Id" type="button" class="btn btn-danger jq-delete">Delete</button></td>
+    </tr>
+
+
+    }
+</table>
+}
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+       
+            $('#customers .jq-delete').on('click', function () {
+                var button=$(this)
+                if (confirm('are you sure want to delete customers'))
+                    $.ajax({
+                        url: '/api/customers/' + $(this).attr('data-customer-id'),
+                        method: 'DELETE',
+                        success: function () {          //buitin property of ajaz point to function
+                            button.parents('tr').remove()
+                        } 
+                    })
+
+
+
+            })
+        
+        })
+
+    
+
+</script>
+
+
+
+}
+
+    @*<script>
+
+
+        $(() => {
+            $('#btndelete').on('click', () => {
+                alert('delete button clicked1')
+            })
+
+        })
+    </script>*@
+
+
+
+
+ 

@@ -1,0 +1,14 @@
+﻿@model MovieRentalMVCApplication.Models.Movie
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<table>
+    <tr><td>Movie:</td><td>@Model.MovieName</td></tr>
+    <tr><td>release date:</td><td>@Model.Releasedate.ToLongDateString()</td></tr>
+    <tr><td>add date:</td><td>@Model.DateAdded.ToLongDateString()</td></tr>
+    <tr><td>no.of stock</td><td>@Model.stock</td></tr>
+    <tr><td>date added</td><td>@Model.DateAdded</td></tr>
+
+</table>

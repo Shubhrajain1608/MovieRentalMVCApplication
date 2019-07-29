@@ -1,0 +1,53 @@
+﻿@model MovieRentalMVCApplication.ViewModel.NewMovieViewModel
+@{
+    /**/
+
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+
+@using (Html.BeginForm("Save", "Movie"))    //controller name//button name
+{<div class="form-group">
+        @Html.LabelFor(m => m.Movie.MovieName)
+        @Html.TextBoxFor(m => m.Movie.MovieName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.MovieName)
+
+    </div>
+  <div class="form-group">
+        @Html.LabelFor(m => m.Movie.Releasedate)
+        @Html.TextBoxFor(m => m.Movie.Releasedate, "{0:d MMMM yyyy}", new { @class = "form-control" })
+       
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.DateAdded)
+        @Html.TextBoxFor(m =>m.Movie.DateAdded, "{0:d MMMM yyyy}", new { @class = "form-control" })
+        
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.Genere)
+        @Html.DropDownListFor(m => m.Movie.GenereId,
+                                 new SelectList(Model.Generes, "Id", "Name"),
+                                    "Select Genere Type",
+                                 new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Movie.Genere)
+
+
+    </div>
+    <div class="form-group">
+            @Html.LabelFor(m => m.Movie.stock)
+            @Html.TextBoxFor(m => m.Movie.stock, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Movie.stock)
+
+        </div>
+
+
+        @Html.HiddenFor(m => m.Movie.Id)
+        <div>
+            <button class="btn btn-primary" type="submit">Save</button>
+
+            <button class="btn btn-primary" type="submit">Back</button>
+        </div>
+
+    }
